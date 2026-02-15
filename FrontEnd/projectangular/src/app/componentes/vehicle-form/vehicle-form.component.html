@@ -1,0 +1,41 @@
+<div class="main-container">
+  <div class="glass-card">
+    <h1 class="form-title">{{btnTitulo}}</h1>
+
+    <form [formGroup]="vehicleForm" (ngSubmit)="submit()" #formDit="ngForm">
+      <input type="hidden" formControlName="id">
+
+      <div class="input-box">
+        <label>Placa:</label>
+        <input type="text" formControlName="plate" placeholder="Insira a placa!" required>
+      </div>
+
+      <div class="input-box">
+        <label>Modelo:</label>
+        <input type="text" formControlName="model" placeholder="Insira o modelo!" required>
+      </div>
+
+      <div class="input-box">
+        <label>Cor:</label>
+        <input type="text" formControlName="color" placeholder="Insira a cor!" required>
+      </div>
+
+      <div class="input-box">
+        <label>Tipo de Veículo:</label>
+        <select id="tipodeveiculo" formControlName="type" required>
+          <option value="" disabled selected>Selecione o tipo</option>
+          <option value="Carro">Carro</option>
+          <option value="Moto">Moto</option>
+          <option value="Caminhao">Caminhão</option>
+        </select>
+      </div>
+
+      <div class="btn-box">
+        <button type="submit" class="btn-save" [disabled]="!vehicleForm.valid">
+          {{btnAcao}}
+        </button>
+        <button type="button" class="btn-cancel" routerLink="/veiculos">Voltar</button>
+      </div>
+    </form>
+  </div>
+</div>

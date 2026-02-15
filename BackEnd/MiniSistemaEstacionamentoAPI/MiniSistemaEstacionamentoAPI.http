@@ -1,0 +1,6 @@
+@MiniSistemaEstacionamentoAPI_HostAddress = http://localhost:5217
+
+GET {{MiniSistemaEstacionamentoAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,82 @@
+<div class="patio-wrapper">
+  <div class="header-patio">
+    <h3>Sessões atualizadas</h3>
+    <button routerLink="/cadastro" class="btn-new-entry">
+      ➕ Registrar Entrada
+    </button>
+  </div>
+
+  <div class="search-box">
+    <input type="text" 
+           placeholder="Buscar por placa (ex: ABC-1234)" 
+           (input)="search($event)">
+    
+    <button (click)="carregarSessoes()" class="btn-clear">Limpar</button>
+  </div>
+
+  <table class="table-custom">
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Placa</th>
+        <th>Modelo</th>
+        <th>Tipo</th>
+        <th>Entrada</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let s of sessions">
+        <td>
+          <img *ngIf="!s.exitTime" src="/assets/images/sessaoaberta.svg" alt="Aberta" width="25">
+          <img *ngIf="s.exitTime" src="/assets/images/sessaoencerrada.svg" alt="Encerrada" width="25">
+        </td>
+        <td><strong>{{ s.vehicle?.plate | uppercase }}</strong></td>
+        <td>{{ s.vehicle?.model }}</td>
+        <td>{{ s.vehicle?.type }}</td>
+        <td>{{ s.entryTime | date:'dd/MM HH:mm' }}</td>
+
+        <td>
+          <button class="btn-exit" (click)="finalizarSaida(s.vehicleId, s.vehicle?.plate)">
+            Encerrar Sessão
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="sessions.length === 0">
+        <td colspan="6" style="text-align: center; padding: 20px;">
+          Nenhum veículo com sessão ativa no momento.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal-overlay" *ngIf="receipt">
+    <div class="receipt-card">
+      <div class="receipt-header">
+        <h4>Recibo de Saída</h4>
+        <p>SessionGomesParking</p>
+      </div>
+
+      <div class="receipt-body">
+        <p><strong>Veículo:</strong> {{ receipt.vehicle?.plate }}</p>
+        <p><strong>Modelo:</strong> {{ receipt.vehicle?.model }}</p>
+        <hr>
+        <p>Entrada: {{ receipt.entryTime | date:'dd/MM/yyyy HH:mm' }}</p>
+        <p>Saída: {{ receipt.exitTime | date:'dd/MM/yyyy HH:mm' }}</p>
+        <hr>
+        <div class="values">
+          <p>Valor Estacionamento: <span>{{ receipt.invoice?.basicPayment | currency:'BRL' }}</span></p>
+          <p>Impostos: <span>{{ receipt.invoice?.taxValue | currency:'BRL' }}</span></p>
+          <p class="total">
+            <strong>Total a Pagar:
+              {{ (receipt.invoice?.basicPayment || 0) + (receipt.invoice?.taxValue || 0) | currency:'BRL' }}
+            </strong>
+          </p>
+        </div>
+      </div>
+      <button class="btn-close" (click)="fecharRecibo()">Concluir e Fechar</button>
+    </div>
+  </div>
+</div>>

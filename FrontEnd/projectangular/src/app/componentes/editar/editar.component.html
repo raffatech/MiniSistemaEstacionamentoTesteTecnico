@@ -1,0 +1,4 @@
+<!-- so carrega o formulario quando o funcionario chegar para edição da api -->
+<div *ngIf="veiculo">
+    <app-vehicle-form [btnAcao]="btnAcao" [btnTitulo]="btnTitulo" [dadosVeiculos]="veiculo" (onSubmit)="editarVeiculo($event)"></app-vehicle-form>
+</div>

@@ -1,0 +1,17 @@
+# Visual Studio / .NET
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+parking.db
+
+# Angular / Node
+node_modules/
+.angular/
+dist/
+.vscode/
+
+# Logs e arquivos de sistema
+*.log
+.DS_Store

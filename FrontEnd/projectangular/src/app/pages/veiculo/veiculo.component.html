@@ -1,0 +1,45 @@
+<div class="vehicle-container">
+  <div class="header-actions">
+    <div class="search-box">
+      <span class="search-label">Procurar:</span>
+      <div class="input-wrapper">
+        <input type="text" placeholder="Buscar veículo pela placa..." (input)="search($event)">
+      </div>
+    </div>
+    
+    <button class="btn-primary" routerLink="/cadastro">
+      <span>➕</span> Cadastrar Veículo
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table-custom">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Placa</th>
+          <th>Modelo</th>
+          <th>Tipo</th>
+          <th>Cor</th>
+          <th class="text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicle of vehicles">
+          <td>
+            <img [src]="vehicle.hasOpenSession ? 'assets/images/sessaoaberta.svg' : 'assets/images/sessaoencerrada.svg'" 
+                 class="status-icon">
+          </td>
+          <td class="plate-text">{{ vehicle.plate | uppercase }}</td>
+          <td>{{ vehicle.model }}</td>
+          <td>{{ vehicle.type }}</td>
+          <td>{{ vehicle.color }}</td>
+          <td class="actions-cell">
+            <button class="btn-edit" [routerLink]="['/editar', vehicle.id]">Editar</button>
+            <button class="btn-details" [routerLink]="['/detalhes', vehicle.id]">Detalhes</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

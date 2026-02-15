@@ -1,0 +1,39 @@
+<div class="main-container" *ngIf="vehicle">
+  <div class="glass-card">
+    <div class="card-header">
+      <h2>Detalhes do Veículo</h2>
+      <span class="status-badge" [ngClass]="vehicle.hasOpenSession ? 'status-open' : 'status-closed'">
+        {{ vehicle.hasOpenSession ? 'Sessão Aberta' : 'Sessão Encerrada' }}
+      </span>
+    </div>
+    
+    <div class="input-box">
+      <label>Placa</label>
+      <input type="text" [value]="vehicle.plate" readonly>
+    </div>
+
+    <div class="input-box">
+      <label>Modelo</label>
+      <input type="text" [value]="vehicle.model" readonly>
+    </div>
+
+    <div class="input-row">
+      <div class="input-box">
+        <label>Cor</label>
+        <input type="text" [value]="vehicle.color" readonly>
+      </div>
+
+      <div class="input-box">
+        <label>Tipo de Veículo</label>
+        <input type="text" [value]="vehicle.type" readonly>
+      </div>
+    </div>
+
+    <div class="btn-box">
+      <button type="button" class="btn-primary" routerLink="/veiculos">Voltar</button>
+      <button type="button" class="btn-edit" [routerLink]="['/editar', vehicle.id]">
+        Ir para Edição
+      </button>
+    </div>
+  </div>
+</div>
